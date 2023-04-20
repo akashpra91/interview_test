@@ -10,10 +10,11 @@ export const axiosInstance = axios.create({
 });
 
 export const getUserDetails = () => {
+  
     return axiosInstance.get("/api")
     .then(res =>{
       if (res.status === 200)
         setUserToStorage(res.data.results[0]);
-        console.log("api called resposn", res);
+        // console.log(`api called resposn${data}`, res );
     })
 }

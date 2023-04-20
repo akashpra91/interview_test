@@ -1,38 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import User from './component/User';
 import { getUserDetails } from './config/axiosInstance';
-import { useEffect, useState } from 'react';
-import { pickProfileImage, pickUserEmail, pickUserName } from './utils/storageUtils';
-import UserInfo from './component/UserInfo';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState('');
-  const [email, setemail] = useState('');
-  const [imgurl, setImgurl] = useState('');
-
+  const [isLoding, setIsLoading] = useState(true);
   useEffect(() => {
-    return () => {
-      getUserDetails()
-        .then(() => {
-          setName(pickUserName());
-          setemail(pickUserEmail());
-          setImgurl(pickProfileImage());
-        })
-        .catch(err => {
-          console.log('something went wrong', err);
-        });
-    };
-  }, [count]);
+    getUserDetails()
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.log('something went wrong', err);
+      });
+  }, []);
 
-  const handleRefresh = (e: any) => setCount(count + 1);
-
-  return (
-    <div className="box">
-      <UserInfo name={name} email={email} url={imgurl} />
-      <button onClick={handleRefresh}>Refresh</button>
-    </div>
-  );
+  return isLoding ? <>Loading....</> : <User />;
 }
 
 export default App;
