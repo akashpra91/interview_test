@@ -19,6 +19,6 @@ export default UserInfo
 
 const ProfileAvatar = (props:any) => {
   return (
-    <img className='avatar circle' src= {props.url}/>
+    <img className='avatar circle' src= {props.url} alt= "profile image"/>
   )
 }
