@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { getUserDetails } from './config/axiosInstance';
 import { useEffect, useState } from 'react';
-import { pickProfileImage, pickUserEmail, pickUserName } from './utils/storageUtils';
+import { getUserFromStorage, pickProfileImage, pickUserEmail, pickUserName } from './utils/storageUtils';
 import UserInfo from './component/UserInfo';
 
 function App() {
@@ -18,7 +18,11 @@ function App() {
   
   return (
     <div className="box">
-      <UserInfo name= {pickUserName()} email={pickUserEmail()} url= {pickProfileImage()}/>
+      {
+      getUserFromStorage() != "" ?
+      <UserInfo name= {pickUserName()} email={pickUserEmail()} url= {pickProfileImage()}/> 
+      :"" }
+      
       <button onClick={handleRefresh}>Refresh</button>
     </div>
   );
