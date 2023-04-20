@@ -24,7 +24,7 @@ export const pickUserEmail = () =>{
 export const pickUserName = () =>{
     const user: string =getUserFromStorage()!;
     const userObj : User = JSON.parse(user);
-    return `${userObj.name.title} ${userObj.name.first} ${userObj.name.last}`;
+    return `${userObj.name.title||""} ${userObj.name.first||""} ${userObj.name.last||""}`;
 }
 
 export const pickProfileImage = () =>{
